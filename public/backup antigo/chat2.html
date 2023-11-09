@@ -1,0 +1,47 @@
+
+      
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sample FirebaseUI App</title>
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/7.0.0/firebaseui.css" />
+
+  <script>
+    const firebaseConfig = {
+	  apiKey: "AIzaSyAxbU2viTgoLFDcoiH0VjI_p3CcIbb9nxI",
+      authDomain: "eunaservice.firebaseapp.com",
+      projectId: "eunaservice",
+      storageBucket: "eunaservice.appspot.com",
+      messagingSenderId: "594238513671",
+      appId: "1:594238513671:web:f9d92e3fa36f4b507d80a2",
+      measurementId: "G-8ES48QPW97"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    const uiConfig = {
+      signInSuccessUrl: 'url-para-redirecionar-no-sucesso.html',
+      signInOptions: [
+        // Mantenha as linhas como estão para os provedores que deseja oferecer aos seus usuários.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      tosUrl: 'seu-url-de-termos-de-serviço.html',
+      privacyPolicyUrl: 'sua-url-de-política-de-privacidade.html'
+    };
+    
+    // Initialize the FirebaseUI Widget
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
+</head>
+<body>
+  <h1>Bem-vindo ao Meu Incrível Aplicativo</h1>
+  <div id="firebaseui-auth-container"></div>
+</body>
+</html>

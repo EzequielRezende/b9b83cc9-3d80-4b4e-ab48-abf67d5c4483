@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload de Imagem</title>
+</head>
+<body>
+    <h1>Upload de Imagem</h1>
+    
+    <form id="upload-form" action="URL_DA_SUA_API_REST" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" id="image-input" accept="image/*" required multiple="1" max="3">
+        <button type="submit">Enviar Imagem</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        const form = document.getElementById("upload-form");
+        const imageInput = document.getElementById("image-input");
+        const responseDiv = document.getElementById("response");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("http://localhost:3000/api/usuario/SmtqYXltIxbvSls4GHRMJmSt5hr1/fotoPerfil", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const data = await response.json();
+                responseDiv.innerHTML = `<p>Resposta do servidor: ${data.message}</p>`;
+            } catch (error) {
+                responseDiv.innerHTML = "<p>Ocorreu um erro no envio da imagem.</p>";
+            }
+        });
+    </script>
+</body>
+</html>

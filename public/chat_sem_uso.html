@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <title>Chat Privado</title>
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth-compat.js"></script>
+  <script src="config.js"></script>
+  <script src="common.js"></script>
+  <script src="firebaseui.js"></script>
+  <script src="socket.io.js"></script>
+  <script type="script" src="teste.js"></script>
+  <script type="script" src="functions.js"></script>
+  <script type="module" src="auth.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="firebaseui.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+      <div id="loaded">
+        <div id="main">
+          <div id="user-signed-in" style="display:none;" >
+            <div id="user-info">
+              <div id="photo-container">
+              </div>
+              <div id="name">nome</div>
+              <div id="email">email</div>
+            </div>
+              <button id="sign-out">Sign Out</button>
+            <p>
+            <select id="id_Chat">
+              <optgroup>
+                <option disabled selected>Selecione uma conversa</option>
+              <optgroup label="Conversas">
+              </optgroup>
+              <
+            </select>
+
+              <div id="chat">
+                <h1>Chat Privado</h1>
+                <label for="recipient">Destinatario:</label>
+                <input type="text" id="recipient">
+                <div id="chat-history"></div>
+                <form id="sendMsg">
+                  <label for="mensagem">Mensagem:</label>
+                  <input type="text" id="mensagem" required />
+                  <button type="submit">Enviar</button>
+                </form>
+              </div>
+          </div>
+          <div id="user-signed-out" class="hidden">
+            <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="app.js"></script>
+</body>
+</html>

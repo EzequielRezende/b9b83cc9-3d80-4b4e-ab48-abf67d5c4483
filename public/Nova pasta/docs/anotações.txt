@@ -1,0 +1,4 @@
+1 - Estilizar a caixa de upload de imagens
+2 - Conferir Responsividade
+4 - Configurar o alerta de login
+5 - Implementar o chat e o login pelo Google

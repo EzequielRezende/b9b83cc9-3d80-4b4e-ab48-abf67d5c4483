@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html><!-- SPA -->
+<head>
+    <title>Meu Site SPA</title>
+
+    <!-- Interface Site -->
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/style-cadastro.css">
+    <link rel="stylesheet" type="text/css" href="styles/style-login.css">
+    
+    <!-- Chat -->
+    <link href="styles/chatStyle.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <!-- firebaseUI -->
+    <link type="text/css" rel="stylesheet" href="firebaseui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Chat -->
+    <script src="js/socket.io.js" ></script>
+    <script src="js/chatApp.js"   ></script>
+    
+    <!-- firebaseUI -->
+    <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth-compat.js"></script>
+    <script src="js/firebaseui.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/auth.js" type="module"></script>
+    <script src="js/FirebaseUiApp.js"  type="module"></script>
+
+    <!-- Rendenização do Conteudo SPA -->
+    <script>
+        // Função para carregar o conteúdo via AJAX com base na URL
+        function loadContent() {
+            var url = window.location.href;
+
+            // Capturar o domínio de forma dinâmica
+            var domain = window.location.origin;
+
+            // Extrair a parte da URL apos o dominio
+            var path = url.split(domain)[1];
+
+            // Construir a URL do conteúdo com base na parte extraída
+            var contentURL = domain + '/contents/' + path;
+
+            // Realizar a solicitação AJAX para buscar o conteúdo completo do arquivo HTML
+            fetch(contentURL)
+                .then(response => response.text())
+                .then(data => {
+                    
+                    // Analisar o conteúdo HTML
+                    var parsedHTML = new DOMParser().parseFromString(data, 'text/html');
+
+                    // Selecionar a tag <body>
+                    var mainElement = parsedHTML.querySelector('main');
+
+                    // Usar o conteúdo da variável 'data' se a tag <body> não for encontrada
+                    var mainContent = mainElement ? mainElement.innerHTML : data;
+
+                    // Inserir o conteúdo diretamente no corpo da página
+                    document.querySelector('main').innerHTML = mainContent;
+
+                    // Após a inserção do conteúdo, chame a função para capturar todas as variáveis da URL e que poderão ser usaddos na chamada à API
+                    processURLParameters();
+                })
+                .catch(error => {
+                    console.error('Erro na solicitação AJAX: ' + error);
+                });
+        }
+
+        // Função para processar todas as variáveis da URL e disponibiliar para a chamada à API
+        function processURLParameters() {
+            // Capturar todas as variáveis da URL
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var variables = {};
+
+            urlParams.forEach(function (value, key) {
+                // Armazenar as variáveis em um objeto
+                variables[key] = value;
+            });
+
+            // Agora, 'variables' contém todas as variáveis da URL
+            console.log(variables);
+
+        }
+
+        // Função para lidar com cliques em links
+        function handleLinkClick(event) {
+            let target = event.target;
+
+            // Verificar se o elemento alvo ou algum de seus pais é um link
+            let isLink = false;
+            let currentElement = target;
+
+            while (currentElement) {
+                if (currentElement.tagName == 'A') {
+                    event.preventDefault(); // Evitar o recarregamento da página
+                    target = currentElement;
+                    isLink = true;
+                    break;
+                } else {
+                    currentElement = currentElement.parentNode;
+                }
+            }
+
+            if (isLink) {
+                const href = target.getAttribute('href');
+                
+                // Verificar se o link é interno
+                if (isInternalLink(href)) {
+                    // Atualizar a URL sem recarregar a página
+                    history.pushState(true, true, href);
+                    loadContent(); // Chamar a função loadContent() para carregar o conteúdo apropriado
+                }
+            }
+        }
+
+
+        function isInternalLink(href) {
+            const currentDomain = window.location.origin;
+
+            // Se o atributo href estiver vazio, é um link interno
+            if (!href) {
+                return true;
+            }
+
+            // Verifique se o link começa com uma barra, indicando um link interno
+            if (href.startsWith('/')) {
+                return true;
+            }
+
+            // Verifique se o link começa com o domínio atual, indicando um link interno
+            if (href.startsWith(currentDomain)) {
+                return true;
+            }
+
+            // Caso contrário, é considerado um link externo
+            return false;
+        }
+
+        // Adicionar um EventListener de 'click' ao documento para lidar com todos os cliques em links
+        document.addEventListener('click', handleLinkClick);
+        window.addEventListener('popstate', loadContent);         // Inicializar o conteúdo com base na URL atual ao alterar a URL
+
+        window.addEventListener('DOMContentLoaded', loadContent);        // Inicializar o conteúdo com base na URL atual ao carregar a pagina
+
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img class="img-logo" src="img/logo-name.png" alt="EunaService">
+        </div>
+        <nav class="nav">
+            <div class="search-container">
+                <input id="barra-de-pesquisa" type="text" class="barra-de-pesquisa" placeholder="Busque Serviços">
+                <button class="pesquisa-btn">Pesquisar</button>
+            </div>
+            <button id="btn-login" class="login-btn">Login</button>
+
+            <!-- Botoes para login social -->
+            <div id="user-signed-out" class="hidden">
+                <div id="firebaseui-spa">
+                        <div id="firebaseui-container"></div>
+                </div>
+            </div>
+
+            <!-- Informações do usuario apos login -->
+            <div id="user-info" >
+                <div id="photo-container">
+                <img src="">
+                </div>
+                <div id="name">nome</div>
+                <div id="email">email</div>
+                <p>
+                <button id="sign-out">Sign Out</button>
+            </div>
+
+
+        </nav>
+    </header>
+    <main>
+        <!-- O Conteudo Será Rendenizado Aqui -->
+    </main>
+    <div class="footer">
+        <div id="loaded">
+        <div id="main">
+          <div id="user-signed-in" style="display:none;" >
+            <select id="id_Chat">
+              <optgroup>
+                <option disabled selected>Selecione uma conversa</option>
+              <optgroup label="Conversas">
+              </optgroup>
+              <
+            </select>
+
+              <div id="chat">
+                <h1>Chat Privado</h1>
+                <label for="recipient">Destinatario:</label>
+                <input type="text" id="recipient">
+                <div id="chat-history"></div>
+                <form id="sendMsg">
+                  <label for="mensagem">Mensagem:</label>
+                  <input type="text" id="mensagem" required />
+                  <button type="submit">Enviar</button>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+</body>
+</html>

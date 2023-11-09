@@ -1,0 +1,1 @@
+esse arquivo contem a chave para acesso aos serviços do google, por padrao ele nao sera distribuido e posteriormente seu conteudo sera colocado como uma variavel anbiente do sistema operacional.

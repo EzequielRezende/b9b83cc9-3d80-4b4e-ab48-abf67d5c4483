@@ -1,0 +1,3 @@
+nesta pasta sao incluidos modulos simples para o funcionamento da base minima do sistema
+ele cria um objeto server, e de acordo com as configurações definidas em ../config/*
+sao inicializados as rotas para o servidor de paginas web, da api, e por fim o sochet.io

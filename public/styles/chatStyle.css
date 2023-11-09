@@ -1,0 +1,63 @@
+#login {
+width: 98vw;
+height: 96vh;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+#login .box {
+width: 300px;
+height: 180px;
+background: #6C7A89;
+text-align: center;
+}
+
+#chat {
+width: 300px;
+height: 450px;
+background: #6C7A89;
+}
+
+#chat h1{
+	height: 30px;
+}
+
+#chat form {
+	position: relative;
+	left: 5px;
+}
+
+#chat-history{
+	background: #fff;
+	width: 290px;
+	height: 330px;
+	overflow-y: scroll;
+}
+
+#chat-history div {
+	position: relative;
+	margin-top: 10px;
+	width: 85%;
+	padding-right:10px;
+	padding-left:5px;
+	padding-bottom:3px;
+	background-color: #ADD8E6;
+}
+
+#chat-history span {
+	font-size: 12px;
+}
+#chat-history .msgReceived {
+	float: left;
+	text-align: left;
+	border-radius: 0 10px 10px 0;/* superior esquerdo, superior direito, inferior direito, inferior esquerdo */
+}
+
+#chat-history .msgSent {
+	float: right;
+	text-align: right;
+	border-radius: 10px 0 0 10px;/* superior esquerdo, superior direito, inferior direito, inferior esquerdo */
+
+}
