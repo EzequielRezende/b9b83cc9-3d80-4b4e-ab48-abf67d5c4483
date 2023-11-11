@@ -14,8 +14,8 @@ module.exports = {
   getAllProfissionais: async (req, res) => {
     try {
       let limit = 15; // Valor padrão
-      if (req.query.limit && req.query.limit >= 5 && req.query.limit <=50){// limit nao pode ser <5 ou >50, defaut sera usado.
-        limit = parseInt(req.query.limit, 10);
+      if (req.params.limit && req.params.limit >= 5 && req.params.limit <=50){// limit nao pode ser <5 ou >50, defaut sera usado.
+        limit = parseInt(req.params.limit, 10);
       }
 
       sql = 'select * from USUARIO where PRESTADOR = 1 limit ?;';
@@ -29,14 +29,14 @@ module.exports = {
   searchProfissionais: async (req, res) => {
     try {
       let limit = 15; // Valor padrão
-      if (req.query.limit && req.query.limit >= 5 && req.query.limit <=50){// limit nao pode ser <5 ou >50, defaut sera usado.
-        limit = parseInt(req.query.limit, 10);
+      if (req.params.limit && req.params.limit >= 5 && req.params.limit <=50){// limit nao pode ser <5 ou >50, defaut sera usado.
+        limit = parseInt(req.params.limit, 10);
       }
 
-      if (!req.query.queryText){
+      if (!req.params.queryText){
         throw new Error('queryText is required.');
       } else{
-        queryText = `%${req.query.queryText}%`
+        queryText = `%${req.params.queryText}%`
       }
 
       //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
@@ -50,16 +50,46 @@ module.exports = {
 
   getProfissionalById: async (req, res) => {
     try {
-      if (!req.query.idProfissional){
+      if (!req.params.idProfissional){
         throw new Error('idProfissional is required.');
       }
 
       //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
-      sql = 'select * from USUARIO where ID_USUARIO = ?;';
-      const users = await Mysql.query(sql, [req.query.idProfissional]);
+      sql = 'SELECT USUARIO.*, GROUP_CONCAT(TELEFONE.numero) AS TELEFONES FROM USUARIO LEFT JOIN TELEFONE ON USUARIO.ID_USUARIO = TELEFONE.ID_USUARIO WHERE USUARIO.ID_USUARIO = "0a99b94c-c089-4900-9565-4a8281390a14" GROUP BY USUARIO.ID_USUARIO;';
+      const users = await Mysql.query(sql, [req.params.idProfissional]);
       res.json(users);
     } catch (error) {
       res.status(500).json({ error: 'Erro ao buscar usuários.' });
+    }
+  },
+
+   verificaCPF: async (req, res) => {
+    try {
+      if (!req.params.cpf){
+        throw new Error('cpf is required.');
+      }
+
+      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
+      sql = `select "CPF já Cadastrado" as status from USUARIO where CPF  = ? limit 1;`;
+      const result = await Mysql.query(sql, [req.params.cpf]);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    }
+  },
+
+    verificaEmail: async (req, res) => {
+    try {
+      if (!req.params.cpf){
+        throw new Error('email is required.');
+      }
+
+      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
+      sql = `select "Email já Cadastrado" as status from USUARIO where EMAIL  = ? limit 1;`;
+      const result = await Mysql.query(sql, [req.params.cpf]);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
     }
   },
 
@@ -70,7 +100,57 @@ module.exports = {
       }
 
       //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
-      sql = 'insert into USUARIO';
+      sql = 'insert into USUARIO ()';
+      //const users = await Mysql.query(sql, [req.query.idProfissional]);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    }
+  },
+
+
+   atualizarHorarioUsuario: async (req, res) => {
+    try {
+      if (!req.body.dataUser){
+        throw new Error('horarioUser is required.');
+      }
+
+      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
+      sql = 'INSERT INTO CATEGORIA (`ID_CATEGORIA`, `NOME`) VALUES (7, "valorInserido") ON DUPLICATE KEY UPDATE `NOME` = "valorAtualizaod";';
+      console.lgo(sql);
+      //const users = await Mysql.query(sql, [req.query.idProfissional]);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    }
+  },
+
+
+   atualizarServicosUsuario: async (req, res) => {
+    try {
+      if (!req.body.horarioUser){
+        throw new Error('servicosUser is required.');
+      }
+
+      sql = 'update';
+      console.lgo(sql);
+      //const users = await Mysql.query(sql, [req.query.idProfissional]);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    }
+  },
+
+
+   ativarUsuario: async (req, res) => {
+    try {
+      if (!req.body.dataUser){
+        throw new Error('dataUser is required.');
+      }
+
+      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
+      sql = 'update';
+      console.lgo(sql);
       //const users = await Mysql.query(sql, [req.query.idProfissional]);
       res.json(users);
     } catch (error) {

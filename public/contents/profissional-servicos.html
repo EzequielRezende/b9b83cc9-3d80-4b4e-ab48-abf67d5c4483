@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/app.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/style-cadastro.css">
-    <link rel="shortcut icon" href="imagens/logo.ico">
+    <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/style-cadastro.css">
+    <link rel="stylesheet" href="/styles/horario-servico.css">
+    <link rel="shortcut icon" href="img/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -16,34 +17,55 @@
 <body>
     <header class="header">
         <div class="header-logo">
-            <a href="home.html"><img class="img-logo" src="img/logo-name.png" alt="EunaService"></a>
+            <a href="home.html"><img class="img-logo" src="/img/logo-name.png" alt="EunaService"></a>
         </div>
     </header>
 
     <main>
-        <a href="javascript:history.back()" class="voltar-btn">
-            <img src="img/seta.ico" alt="Voltar">
-        </a>
-        <h1 class="h1-cadastro">Cadastro (Profissional)</h1>
-        <h2 class="fases-do-cadastro">
-            <p><span style="color: #ff7900;">Dados Pessoais</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Dados de Acesso</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Fotos</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Horários</span></p> 
-            <p>></p>
-            <p><span style="color: #ff7900;">Serviços</span></p>
-        </h2>
+        <section class="cabecalho">
+            <a href="javascript:history.back()" class="voltar-btn">
+                <img src="/img/seta.ico" alt="Voltar">
+            </a>
+            <h1 class="h1-cadastro">Cadastro (Profissional)</h1>
+            <h2 class="fases-do-cadastro">
+                <p><span style="color: #ff7900;">Dados Pessoais</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Dados de Acesso</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Fotos</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Horários</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Serviços</span></p>
+            </h2>
+        </section>
+
+        <section class="servico">
+            <div class="adicionar-servico">
+                <form action="">
+                    <input type="text" placeholder="Serviço">
+                    <input type="text" placeholder="Valor Diária">
+                    <input type="submit" value="+ Adicionar Serviço">
+                    <div class="coluna 2">
+                        <label for="empreita-check">Aceito Empreita</label>
+                        <input id="empreita-check" type="checkbox">
+                        <select id="select-servico" class="select-servico">
+                            <option value="">Selecione uma opção...</option>
+                            <option value="opcao1">Opção 1</option>
+                            <option value="opcao2">Opção 2</option>
+                            <option value="opcao3">Opção 3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </section>
 
         <section class="area-de-cadastro">
                 <div class="btn-vai-e-volta">
                     <button id="botao-anterior" class="botao-anterior">< Anterior</button>
-                    <button id="botao-proximo5" class="botao-proximo">Próximo ></button>
-                    <script src="js/app.js"></script>
+                    <button id="botao-proximo5" class="botao-proximo">Concluir ✓</button>
+                    <script src="/js/app.js"></script>
                 </div>
         </section>
-        <p>Implementar servicos</p>
     </main>
 </body>

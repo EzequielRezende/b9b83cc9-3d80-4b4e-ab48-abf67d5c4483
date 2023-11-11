@@ -174,7 +174,7 @@ body {
 form [type="submit"] {
     background-color: #ff7900;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-width: 0px;
     border-radius: 10px;
     border: 1px solid #ff7900;
@@ -221,7 +221,16 @@ input[type="file"] {
     display: none;
 }
 
-label {
+.box-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 100px;
+    min-width: 100px;
+}
+
+.box-foto > label {
     padding: 20px;
     width: 100px;
     background-color: rgb(255, 255, 255);
@@ -238,13 +247,26 @@ label {
     min-width: 100px;
 }
 
-.box-foto {
+.box-foto-perfil {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
     height: 100px;
-    min-width: 100px
+    min-width: 100px;
+}
+
+.box-foto-perfil > label {
+    background-color: rgb(255, 255, 255);
+    color: #b1b1b1;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    cursor: pointer;
+    width: 80px;
+    height: 70px;
+    padding: 10px;
+    text-align: center;
 }
 
 .painel-de-fotos {

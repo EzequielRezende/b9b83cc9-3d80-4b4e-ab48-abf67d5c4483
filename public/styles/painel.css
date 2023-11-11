@@ -1,0 +1,135 @@
+* {
+    flex-wrap: wrap;
+}
+
+.area-painel {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    min-height: 70vh;
+    padding: 5px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 3%;
+}
+
+.info-painel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.coluna-1-p {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+}
+
+#foto-perfil-painel {
+    border-radius: 50%;
+    margin-bottom: 10%;
+}
+
+#chat-profissional {
+    border: none;
+    background-color: #ff7900;
+    color: white;
+    font-size: large;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
+}
+
+.coluna-2-p {
+    display: block;
+    flex-wrap: wrap;
+    width: 65%;
+    font-size: smaller;
+}
+
+.coluna-2-p p {
+    flex-wrap: wrap;
+    text-align: justify;
+    margin-bottom: 15px;
+    max-width: 80%;
+}
+
+.coluna-2-p h1, h2 {
+    margin-bottom: 15px;
+}
+
+#valor-do-servico {
+    max-width: 15%;
+    background-color: #8084F5;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    padding: 8px;
+}
+
+.galeria-de-fotos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.galeria-de-fotos img {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    margin: 10px;
+    min-height: 170px;
+    min-width: 170px;
+    width: 300px;
+    height: 300px;
+}
+
+.comentarios {
+    background-color: azure;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.comentarios > h1, h2, h3 {
+    font-size: small;
+}
+
+.coluna-2-p > button {
+    pointer-events: none;
+    width: 150px;
+    max-width: 25%;
+    margin-bottom: 2%;
+}
+
+.resposta-pesquisa {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+}
+
+.titulo h1{
+    margin-left: 10%;
+    margin-top: 30px;
+    width: 600px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.area-de-resultados {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-width: 500px;
+    width: 80%;
+}
+
+.dias-de-servico {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    max-height: 124px;
+    min-height: 124px;
+    min-width: 400px;
+    width: 500px;
+}

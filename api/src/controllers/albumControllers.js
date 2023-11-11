@@ -25,12 +25,17 @@ class AlbumController {
 
   async uploadImgsAlbum(req, res) {
     try {
-      if (!req.file || !req.file.filename || res.fileValidation) {
+      console.log(req.files);
+      if (!req.files || !req.files.length>0 || res.fileValidation) {
         return res.status(400).json({ message: 'Arquivo inválido. Apenas arquivos de imagem são permitidos.' });
       }
 
       // A imagem enviada está disponível em req.file
-      const uploadedImage = req.file.filename;
+      const uploadedImage = req.files;
+      //////////////////////////////////////////////////////////////////////////
+      /////////////////////UPLOAD COM SUCESSO///////////////////////////////////
+      /////////////////////CONTINUA A PARTIR DAQUI//////////////////////////////
+      //////////////////////////////////////////////////////////////////////////
       //const sql = `UPDATE USUARIO SET FOTO_PERFIL='${req.file.filename}' WHERE ID_USUARIO='${req.params.idUsuario}'`
       //Mysql.query(sql);
 

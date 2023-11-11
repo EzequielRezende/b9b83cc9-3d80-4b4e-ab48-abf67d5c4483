@@ -36,7 +36,7 @@ class Multer {
             albums: () => `uploads/albums/${req.params.idAlbum}/`,
         };
 
-        if (uploadPaths[uploadType]()) {
+        if (uploadPaths.hasOwnProperty(uploadType) && typeof uploadPaths[uploadType] === 'function') {
             const directoryPath = path.join(__dirname, '../../..', uploadPaths[uploadType]());
             this.checkDirExists(directoryPath);
             return directoryPath;

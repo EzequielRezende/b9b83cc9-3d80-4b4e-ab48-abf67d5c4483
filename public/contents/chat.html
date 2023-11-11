@@ -3,8 +3,8 @@
 <head>
   <title>Chat Privado</title>
   <script src="/socket.io.js"></script>
-  <script src="js/chat.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="/js/chat.js"></script>
+  <link rel="stylesheet" type="text/css" href="/styles/style.css">
   <!-- Testar depois se o arquivo que foi criado separado funciona -->
   <!-- Para poder deixar somente o html nessa página -->
   <script>
@@ -15,7 +15,7 @@
       socket.emit('event', {
         "type":'userLogin',
         "data": {
-          username:username, 
+          username:username,
           token:token,
         }
       });

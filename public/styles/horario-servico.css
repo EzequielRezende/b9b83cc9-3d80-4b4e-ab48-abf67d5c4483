@@ -1,0 +1,134 @@
+.cabecalho {
+    display: flex;
+    flex-direction: column;
+}
+
+.voltar-btn{
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.fases-do-cadastro, .h1-cadastro {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-left: 10%;
+}
+
+.area-de-cadastro {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: auto;
+    min-height: 1vh;
+}
+
+.area-de-horarios {
+    margin-left: 5%;
+    margin-right: 5%;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 88%;
+}
+
+.card-horario {
+    display: flex;
+    margin: 15px;
+    width: 30%;
+    min-height: 15vh;
+    border-radius: 5px;
+    padding-left: 2px;
+    justify-content: center;
+}
+
+input[type="time"] {
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #8b8b8b;
+    min-width: 90%;
+    min-height: 35%;
+}
+
+.card-horario  input {
+    margin-top: 8%;
+
+}
+
+.servico {
+    display: flex;
+    justify-content: center;
+    min-height: 20vh;
+}
+
+.adicionar-servico {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row; /* Alteração principal: Mudar a direção para "row" */
+    align-items: center; /* Alinhar os elementos verticalmente ao centro */
+    width: 40%;
+    min-width: 700px;
+    min-height: 40%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 7px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.adicionar-servico input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.adicionar-servico label {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.adicionar-servico input[type="text"] {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 1px solid #8b8b8b;
+    min-width: 200px;
+    min-height: 50px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #ff7900;
+    color: #fff; 
+    border: none;
+    border-radius: 10px;
+    min-width: 200px;
+    min-height: 50px;
+    padding: 20px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ff7900;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #ff7900;
+}
+
+.select-servico {
+    margin-left: 44px;
+    border-radius: 10px;
+    min-width: 211px;
+    min-height: 50px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}

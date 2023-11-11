@@ -19,7 +19,6 @@
 /**
  * @return {string} The reCAPTCHA rendering mode from the configuration.
  */
-
 function getRecaptchaMode() {
   var config = parseQueryString(location.hash);
   return config['recaptcha'] === 'invisible' ?

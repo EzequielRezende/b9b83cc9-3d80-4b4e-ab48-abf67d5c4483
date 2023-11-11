@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/app.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/style-cadastro.css">
-    <link rel="shortcut icon" href="imagens/logo.ico">
+    <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/style-cadastro.css">
+    <link rel="stylesheet" href="/styles/horario-servico.css">
+    <link rel="shortcut icon" href="/img/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -16,34 +17,94 @@
 <body>
     <header class="header">
         <div class="header-logo">
-            <a href="home.html"><img class="img-logo" src="img/logo-name.png" alt="EunaService"></a>
+            <a href="home.html"><img class="img-logo" src="/img/logo-name.png" alt="EunaService"></a>
         </div>
     </header>
 
     <main>
-        <a href="javascript:history.back()" class="voltar-btn">
-            <img src="img/seta.ico" alt="Voltar">
-        </a>
-        <h1 class="h1-cadastro">Cadastro (Profissional)</h1>
-        <h2 class="fases-do-cadastro">
-            <p><span style="color: #ff7900;">Dados Pessoais</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Dados de Acesso</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Fotos</span></p>
-            <p>></p>
-            <p><span style="color: #ff7900;">Horários</span></p> 
-            <p>></p>
-            <p>Serviços</p>
-        </h2>
+        <section class="cabecalho">
+            <a href="javascript:history.back()" class="voltar-btn">
+                <img src="/img/seta.ico" alt="Voltar">
+            </a>
+            <h1 class="h1-cadastro">Cadastro (Profissional)</h1>
+            <h2 class="fases-do-cadastro">
+                <p><span style="color: #ff7900;">Dados Pessoais</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Dados de Acesso</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Fotos</span></p>
+                <p>></p>
+                <p><span style="color: #ff7900;">Horários</span></p>
+                <p>></p>
+                <p>Serviços</p>
+            </h2>
+        </section>
+
+        <section class="area-de-horarios">
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="segunda" name="dias" value="segunda">
+                    <label for="segunda">Segunda-Feira</label><br>
+                    <input type="time" id="horario-segunda-inicio" name="horario-inicio">
+                    <input type="time" id="horario-segunda-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="terca" class="check" name="dias" value="terca">
+                    <label for="terca">Terça-Feira</label><br>
+                    <input type="time" id="horario-terca-inicio" name="horario-inicio">
+                    <input type="time" id="horario-terca-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="quarta" name="dias" value="quarta">
+                    <label for="quarta">Quarta-Feira</label><br>
+                    <input type="time" id="horario-quarta-inicio" name="horario-inicio">
+                    <input type="time" id="horario-quarta-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="quinta" name="dias" value="quinta">
+                    <label for="quinta">Quinta-Feira</label><br>
+                    <input type="time" id="horario-quinta-inicio" name="horario-inicio">
+                    <input type="time" id="horario-quinta-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="sexta" name="dias" value="sexta">
+                    <label for="sexta">Sexta-Feira</label><br>
+                    <input type="time" id="horario-sexta-inicio" name="horario-inicio">
+                    <input type="time" id="horario-sexta-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="sabado" name="dias" value="sabado">
+                    <label for="sabado">Sábado</label><br>
+                    <input type="time" id="horario-sabado-inicio" name="horario-inicio">
+                    <input type="time" id="horario-sabado-fim" name="horario-fim">
+                </form>
+            </div>
+            <div class="card-horario">
+                <form action="">
+                    <input type="checkbox" id="domingo" name="dias" value="domingo">
+                    <label for="domingo">Domingo</label><br>
+                    <input type="time" id="horario-domingo-inicio" name="horario-inicio">
+                    <input type="time" id="horario-domingo-fim" name="horario-fim">
+                </form>
+            </div>
+        </section>
 
         <section class="area-de-cadastro">
-                <div class="btn-vai-e-volta">
-                    <button id="botao-anterior" class="botao-anterior">< Anterior</button>
-                    <button id="botao-proximo4" class="botao-proximo">Próximo ></button>
-                    <script src="js/app.js"></script>
-                </div>
+            <div class="btn-vai-e-volta">
+                <button id="botao-anterior" class="botao-anterior">< Anterior</button>
+                <button id="botao-proximo4" class="botao-proximo">Próximo ></button>
+                <script src="/js/app.js"></script>
+            </div>
         </section>
-        <p>Implementar horarios</p>
     </main>
 </body>

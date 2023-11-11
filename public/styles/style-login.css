@@ -8,17 +8,17 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+main {
+    padding: 30px;
+}
+
 .area-login {
     display: flex;
     width: auto;
-    height: 70vh;
+    min-height: 60vh;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-}
-
-main {
-    padding: 30px;
 }
 
 .login {
@@ -105,9 +105,11 @@ form [type="submit"] {
     margin-right: 10px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  right:  0;
-  padding: 10px; /* Espaçamento interno do rodapé */
+#btn-entrar {
+    background-color: #ff7900;
+    color: #fff;
+    border: none;
+    width: 100%;
+    min-height: 45px;
+    margin-top: 20px;
 }
