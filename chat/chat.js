@@ -31,7 +31,7 @@ class Chat {// para instancia o chat e necessarios ennviar um objet socket.io in
 						LIMIT 25 `;
 
         	    	Mysql.select("USUARIO", ["count(*) as login"],`ID_USUARIO='${decodedToken.uid}'`).then(result=>{
-        	    		if(result[0].login>0){
+        	    		if(result && result[0].login>0){
 			 	       		this.Controller.Users.new(socket, decodedToken);
 					 		socket.emit('userLogin', "success");
 			 	       	}else{

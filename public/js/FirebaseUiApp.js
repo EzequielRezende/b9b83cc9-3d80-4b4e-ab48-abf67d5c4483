@@ -35,10 +35,29 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 //ui.disableAutoSignIn();
 
 var handleSignedInUser = function(user) {
+  // apos login
   user.getIdToken().then(async function(token) {
-    document.getElementById('user-info').style.display = 'block';
+    window.token = token;
+    var firebaseui_container = document.getElementById('firebaseui-container');
+    document.getElementById('btn-login').style.display = 'none';
+    document.getElementById('sign-out').style.display = 'block';
+    //window.location="/home.html"
+    if(firebaseui_container){ firebaseui_container.innerHTML=""; }
+    
+    
+    apiRequest(urlApi+"usuario/login",(error, data)=>{
+      try {
+        if(data.message == "Sucess"){
+          startSocket(token); // o socket so é conetctado pos ter o token de login
+        }else if(data.message =="cadastroInconpleto"){
+          var url = window.location.origin+"/cadastro.html";
+          loadContent(false, url);
+        }
+        console.log(data);
+      }catch (error) {}
+    }, 'GET', null);
 
-      startSocket(token); // o socket so é conetctado pos ter o token de login
+
   }).catch(function(error) {
     console.error(error);
   });
@@ -46,10 +65,19 @@ var handleSignedInUser = function(user) {
 };
 
 var handleSignedOutUser = function() {
-  document.getElementById('user-info').style.display = 'none';
+  //quando nao logado
+  var divUserInfo = document.getElementById('user-info');
+  var btSignOut  = document.getElementById('sign-out');
+  var firebaseui_container = document.getElementById('firebaseui-container');
+
+  if(divUserInfo){ divUserInfo.style.display = 'none';}
+  if(btSignOut)  { btSignOut.style.display = 'none';}
+  
   document.getElementById('user-signed-in').style.display = 'none';
-  document.getElementById('user-signed-out').style.display = 'block';
-  ui.start('#firebaseui-container', getUiConfig());
+  document.getElementById('btn-login').style.display = 'block';
+  if(firebaseui_container){
+    ui.start('#firebaseui-container', getUiConfig());
+  }
 };
 
 firebase.auth().onAuthStateChanged(function(user) {

@@ -39,25 +39,17 @@ function startSocket(token){
     while (goupConversas.firstChild) {
       goupConversas.removeChild(goupConversas.firstChild);
     }
-
-    //console.log(data);
-    data.forEach(function (line) {
-      recipient = (window.User().uid == line.ID_USUARIO_CONTRATADO) ? line.ID_USUARIO_EMPREGADOR : line.ID_USUARIO_CONTRATADO
-      var option = document.createElement("option");
-      option.value = line.ID_CHAT;
-      option.textContent = line.ID_CHAT;
-      option.setAttribute("data-recipient", recipient);
-      goupConversas.appendChild(option);
-    });
+    if(data){
+      data.forEach(updateSelectList);
+    }
   });
 
   socket.on('userLogin', (data) => {
     if(data == "success"){
       var user  = window.User();
       document.getElementById('user-signed-in').style.display = 'block';
-      document.getElementById('user-signed-out').style.display = 'none';
-      document.getElementById('name').textContent = user.displayName;
-      document.getElementById('email').textContent = user.email;
+      //document.getElementById('user-signed-out').style.display = 'none';
+      document.getElementById('btn-login').style.display = 'none';
     } else if(data == "userNotRegistered"){
       //usuario nao registrado na plataforma, encaminhar para pag de cadastro
     } else {
@@ -66,6 +58,16 @@ function startSocket(token){
       handleSignedOutUser();
     }
   });
+}
+
+function updateSelectList(line) {
+  recipient = (window.User().uid == line.ID_USUARIO_CONTRATADO) ? line.ID_USUARIO_EMPREGADOR : line.ID_USUARIO_CONTRATADO
+  var option = document.createElement("option");
+    option.value = line.ID_CHAT;
+    option.textContent = line.ID_CHAT;
+    option.setAttribute("data-recipient", recipient);
+    goupConversas = document.getElementById("id_Chat").querySelector('optgroup[label="Conversas"]');
+    goupConversas.appendChild(option);
 }
 
 

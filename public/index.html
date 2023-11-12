@@ -46,10 +46,20 @@
     <!-- Rendenização do Conteudo SPA -->
     <script>
         // Função para carregar o conteúdo html via AJAX com base na URL
-        function loadContent() {
-            var url = window.location.href;// Capturar o domínio de forma dinâmica
-            var domain = window.location.origin;// Extrair a parte da URL apos o dominio
+        function loadContent(event, url) {
+            if(!url){
+                url=window.location.href
+            } else{
+                if (!url.startsWith(window.location.origin)) {
+                    url=window.location.origin+url;
+                }
+                if(window.location!=url){
+                    history.pushState(true, true, url);  // Atualizar a URL sem recarregar a página
+                }
+            }
+            var domain = window.location.origin;
             var path = url.split(domain)[1];
+            if (path=="/" || path==""){ window.location="/home.html"; }
 
             var contentURL = domain + '/contents/' + path;// Construir a URL do conteúdo com base na parte extraída
 
@@ -68,9 +78,9 @@
 
                     // Após a inserção do conteúdo, chame a função para capturar todas as variáveis da URL e que poderão ser usaddos na chamada à API
 
-                    var page =  path.replace(".html", "").replace("/", "");
-                    if(rotinas.hasOwnProperty(page)) {
-                        rotinas[page]();
+                    var pageName =  path.replace(".html", "").replace("/", "");
+                    if(rotinas.hasOwnProperty(pageName)) {
+                        rotinas[pageName]();
                     }
 
                     processURLParameters();
@@ -91,10 +101,6 @@
             urlParams.forEach(function (value, key) {
                 variables[key] = value;// Armazenar as variáveis em um objeto
             });
-
-            // Agora, 'variables' contém todas as variáveis da URL
-            console.log(variables);
-
         }
 
         function handleLinkClick(event) {// Função para lidar com cliques em links
@@ -117,11 +123,8 @@
 
             if (isLink) {
                 const href = target.getAttribute('href');
-                
-                console.log(href);
                 if (isInternalLink(href)) {// Verificar se o link é interno
-                    history.pushState(true, true, href);  // Atualizar a URL sem recarregar a página
-                    loadContent(); // Chamar a função loadContent() para carregar o conteúdo apropriado
+                    loadContent(false, href); // Chamar a função loadContent() para carregar o conteúdo apropriado
                 }else if(href =="javascript:history.back()"){
                     window.history.back();
                 }
@@ -172,25 +175,10 @@
             </select>
             <button id="search-button">Pesquisar</button>
         </div>
-        <button id="btn-login" class="login-btn" style="display: none;">Login</button>
+        <button id="btn-login" class="login-btn">Login</button>
+        <button id="sign-out"  class="login-btn">Sign Out</button>
 
-        <!-- Botoes para login social -->
-        <div id="user-signed-out" class="hidden">
-            <div id="firebaseui-spa">
-                    <div id="firebaseui-container"></div>
-            </div>
-        </div>
 
-        <!-- Informações do usuario apos login -->
-        <div id="user-info" class="user-info">
-            <div id="photo-container">
-                <img src="">
-            </div>
-            <div id="name">nome</div>
-            <div id="email" class="email-sign">email</div>
-            <p>
-            <button id="sign-out">Sign Out</button>
-        </div>
     </header>
     <main>
         <!-- O Conteudo Será Rendenizado Aqui -->

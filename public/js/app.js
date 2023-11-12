@@ -26,7 +26,8 @@ function addListners() {
 
     const elementosAddListner = [
         { id: "btn-cadastrar-1"  , evento:"click" , funcao: (function(event) {cadastroEtapa1(event);}) },
-        { id: "botao-anterior"  , evento:"click" , funcao: (function (event) {window.history.back();}) },
+        { id: "botao-anterior"  , evento:"click" , funcao: window.history.back },
+        { id: "bt-fill-google"  , evento:"click" , funcao: preencheFormGoogle },
     ];
 
 
@@ -60,18 +61,15 @@ function validarFormulario() {
         alert("Por favor, preencha o campo 'Email'");
         return false;
     }
-    //estes elementos nao existem no formulario
-    /*if (senha === "") {
-        alert("Por favor, preencha o campo 'Senha'");
-        return false;
-    }*/
-
-    /*if (senha !== copySenha) {
-        alert("As senhas não coincidem. Por favor, verifique.");
-        return false;
-    }*/
-
     return true; // Formulário válido
+}
+
+
+function preencheFormGoogle(){
+    const formulario = document.getElementById('form-cad-cliente');
+    formulario.NOME.value = window.User().displayName;
+    formulario.EMAIL.value = window.User().email;
+    //formulario.NOME.value = window.User().phoneNumber);
 }
 
 // Apresenta as fotos no cadastro
@@ -91,6 +89,8 @@ function displayFileImage(inputId, imageId) {
 }
 
 function cadastroEtapa1(event) {
+    if (!validarFormulario()){return false}
+    
     var form = document.getElementById('form-cad-cliente');
         var formData = new FormData(form);
         var jsonData = {};
@@ -98,6 +98,7 @@ function cadastroEtapa1(event) {
         formData.forEach(function (value, key) {
             jsonData[key] = value;
         });
-        console.log(validarFormulario());
-        console.log(JSON.stringify(jsonData));
+        console.log(jsonData);
+
+        apiRequest(urlApi+"usuario/cadastrar/json", console.log, 'POST', {'dataUser':jsonData})
 }

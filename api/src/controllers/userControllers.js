@@ -93,19 +93,34 @@ module.exports = {
     }
   },
 
-   cadastroUsuario: async (req, res) => {
+  getInfoCadastro : async (req, res) => {
     try {
-      if (!req.body.dataUser){
+      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
+      sql = `SELECT * FROM USUARIO WHERE ID_USUARIO="${req.user.uid}"`;
+      const result = await Mysql.query(sql, [req.query.idProfissional]);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: "Erro ao recuperar dados do usuário. \n" + error });
+    }
+  },
+
+
+   cadastroUsuario: async (req, res) => {
+    //try {
+      var data = req.body.dataUser;
+      data.ID_USUARIO = req.user.uid
+      console.log(data);
+      if (!data){
         throw new Error('dataUser is required.');
       }
 
-      //essa consulta é muito mais complexa que isso, deve agauardar assistencia do DataBase-Mem
-      sql = 'insert into USUARIO ()';
-      //const users = await Mysql.query(sql, [req.query.idProfissional]);
-      res.json(users);
-    } catch (error) {
-      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
-    }
+      const clauseUpdate = Object.keys(data).map(key => `${key} = VALUES(${key})`).join(', ');
+      const sql = `INSERT INTO USUARIO SET ? ON DUPLICATE KEY UPDATE ${data}`;
+      const result = await Mysql.query(sql, data);
+      res.status(200).json(result);
+    //} catch (error) {
+    //  res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    //}
   },
 
 
@@ -158,7 +173,9 @@ module.exports = {
     }
   },
 
-
+    login: async (req, res) => {
+      return res.status(200).json({ message: 'Sucess' });
+    }
 
   // Implemente as demais funções do CRUD aqui usando mysqlquery
 };

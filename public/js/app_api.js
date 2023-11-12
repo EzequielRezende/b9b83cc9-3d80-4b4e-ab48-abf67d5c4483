@@ -9,6 +9,12 @@ function apiRequest(url, callback, method='GET', data=null) {
 	        },
         };
 
+    if (window.token) { // coloca o token no cabeçalho da requisição
+        requestOptions.headers['Authorization'] = window.token;
+      } else{
+        console.log("no token");
+      }
+
     if (data) {
         requestOptions.body = JSON.stringify(data);
     }
@@ -17,6 +23,7 @@ function apiRequest(url, callback, method='GET', data=null) {
 	    if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.statusText}`);
         }
+        console.log(response);
         return response.json();
     }).then((responseData) => {
         callback(null, responseData);
@@ -79,7 +86,6 @@ function elementId(id){
 /////////////////////////////////////////////////////////////////////////////////
 // Modelos de Elementos e atributos
 var cardsHome = function(data){
-	console.log(data);
 	return [
     { tag: "div", class: "cards-servicos", id:"cards-servicos"+data.ID_USUARIO, children: [
         { tag: "div", class: "coluna-1-s", children: [
@@ -114,17 +120,37 @@ var modelos = {
 //////////////////////DEFINIÇÃO DE ROTINAS///////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var home=function(){
+const home=function(){
 	startRequest(urlApi+'profissionais/getAll/15', modelos['cardsHome'], elementId("grid-t2"));
-
-
 }
 
+
+const cadProf_Pessoal = async () => {
+    await new Promise(resolve => setTimeout(resolve, 2000)); 
+    console.log("cadProf_Pessoal");
+    apiRequest(urlApi+'usuario/cadastro/getInfo', (error, data) => {
+        if (error) {
+            console.error('Erro ao acessar o endpoint:', error);
+        } else if (data[0]){
+            console.log(data);
+            const formulario = document.getElementById('form-cad-cliente');
+            const camposFormulario = formulario.querySelectorAll('input, select, textarea');
+
+            camposFormulario.forEach(campo => {
+                const nomeCampo = campo.name;
+                if (data[0].hasOwnProperty(nomeCampo)) {
+                    campo.value = data[0][nomeCampo];
+                }
+            });
+        }
+    });  
+} 
 
 /////////////////////////////////////////////////////////////////////////////////
 //////////////////////MAPEAMENTO DAS ROTINAS///////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
 var rotinas = {
-	home:home,
+    home:home,
+    'profissional-pessoais':cadProf_Pessoal,
 }

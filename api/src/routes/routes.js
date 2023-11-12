@@ -20,6 +20,9 @@ routes.get('/profissionais/getAll/:limite' 				, UserControllers.getAllProfissio
 routes.get('/profissionais/search/:querySearch/:limite' , UserControllers.searchProfissionais);  
 routes.get('/profissional/:id' 							, UserControllers.getProfissionalById);  
 
+routes.get('/usuario/login' 							, Auth.validate, UserControllers.login);  
+routes.get('/usuario/cadastro/getInfo'					, Auth.validate, UserControllers.getInfoCadastro);
+
 //routes.get('/usuario/verificar/:cpf'						, UserControllers.verificaCPF);
 //routes.get('/usuario/verificar/:email'						, UserControllers.verificaEmail);
 

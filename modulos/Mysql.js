@@ -46,8 +46,8 @@ class Mysql {
       const results = await this.pool.promise().query(sql, values);
       return results[0]; // Obtenha os resultados da consulta a partir do array
     } catch (error) {
+      //ainda falta implementar um trataento de erro especifico "ECONNRESET" quano a conexo é perdida
       console.log(error);
-      console.error(error);
     }
   }
 
