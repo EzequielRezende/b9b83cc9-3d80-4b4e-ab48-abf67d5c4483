@@ -15,6 +15,12 @@ function getUiConfig() {
     'signInFlow': 'popup',
     'signInOptions': [
       {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        requireDisplayName: false
+      }
+    ],
+    /*'signInOptions2': [
+      {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         clientId: CLIENT_ID
       },
@@ -22,7 +28,7 @@ function getUiConfig() {
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         requireDisplayName: true,
       }
-    ],
+    ],*/
     'tosUrl': 'http://localhost/',
     'privacyPolicyUrl': 'http://localhost/',
     'credentialHelper': CLIENT_ID && CLIENT_ID != 'YOUR_OAUTH_CLIENT_ID' ?
@@ -94,7 +100,7 @@ window.addEventListener('load', function() {
     if(!window.User()){
         handleSignedOutUser();
     }
-  }, 5000);
+  }, 50000);
 
   document.getElementById('sign-out').addEventListener('click', function() {
     firebase.auth().signOut();

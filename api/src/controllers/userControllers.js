@@ -1,4 +1,7 @@
+
 const Mysql = require('../../../modulos/Mysql');
+const Auth = require("../../../middlewares/authentication.js");
+
 
 module.exports = {
   getTime: async (req, res) => {
@@ -106,21 +109,23 @@ module.exports = {
 
 
    cadastroUsuario: async (req, res) => {
-    //try {
+    console.log(req);
+    try {
       var data = req.body.dataUser;
+      req.user =  await Auth.tokenValidate(req.header('Authorization'));
       data.ID_USUARIO = req.user.uid
-      console.log(data);
+      //console.log(data);
       if (!data){
         throw new Error('dataUser is required.');
       }
 
       const clauseUpdate = Object.keys(data).map(key => `${key} = VALUES(${key})`).join(', ');
-      const sql = `INSERT INTO USUARIO SET ? ON DUPLICATE KEY UPDATE ${data}`;
+      const sql = `INSERT INTO USUARIO SET ? ON DUPLICATE KEY UPDATE ${clauseUpdate}`;
       const result = await Mysql.query(sql, data);
       res.status(200).json(result);
-    //} catch (error) {
-    //  res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
-    //}
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    }
   },
 
 

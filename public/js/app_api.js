@@ -55,7 +55,11 @@ function startRequest(url, modelo, contenier){
 function createElementWithAttributes(tag, attributes) {
     var element = document.createElement(tag);
     for (var key in attributes) {
-        element[key] = attributes[key];
+        if(key=="class"){
+             element.setAttribute(key, attributes[key]);
+        }else {
+           element[key] = attributes[key];
+        }
     }
     return element;
 }

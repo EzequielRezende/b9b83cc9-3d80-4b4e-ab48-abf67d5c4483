@@ -14,11 +14,11 @@ class Authentication {
   }
 
   validate = async (req, res, next) => {
-    const token = req.header('Authorization');
-    const decodedToken = await this.tokenValidate(token);
 
-    if (decodedToken) {
-      req.user = decodedToken;
+    const decodedToken = await this.tokenValidate(req.header('Authorization'));
+    req.user = decodedToken;
+
+    if (req.user) {
       const sql=`select ID_USUARIO from USUARIO where ID_USUARIO="${req.user.uid}"`;
       const result = await Mysql.query(sql);
       console.log(result.length);
@@ -32,14 +32,14 @@ class Authentication {
   }
 
   async tokenValidate(token) {
-    if (!token) {
-      return false;
-    }
-
     try {
-      const decodedToken = await admin.auth().verifyIdToken(token);
-      return decodedToken;
+      if (!token) {
+          return false;
+      }
+      return  await admin.auth().verifyIdToken(token);
+
     } catch (error) {
+      console.log("deu ruin ", error);
       return false;
     }
   }

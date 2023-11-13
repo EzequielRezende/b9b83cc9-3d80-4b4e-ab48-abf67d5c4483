@@ -41,28 +41,6 @@ header img {
     margin-right: 5px;
 }
 
-#user-signed-out {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 90%;
-    padding: auto;
-}
-
-#user-signed-out button {
-    display: flex;
-    flex-wrap: wrap;
-    width:22%;
-}
-
-#user-signed-out p {
-    display: flex;
-    flex-wrap: wrap;
-    width:22%;
-    text-align: justify;
-}
-
-
 #name{
     display: none;
 }
@@ -310,19 +288,6 @@ h1 {
     margin: 0;
 }
 
-/*
-.btn-diaria {
-    border: none;
-    background-color: #8084F5;
-    color: white;
-    width: 20%;
-    pointer-events: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    min-width: 93px;
-    min-height: 40px;
-}
-*/
-
 .btn-empreita {
     border: 1px solid #ccc;
     color: rgba(0, 0, 0, 0.733);
@@ -386,4 +351,28 @@ footer > div{
 
 .search-bar button:hover {
     background-color:#ff7700d5;
+}
+
+
+.box {
+    display: flex;
+    width: 500px;
+    padding: 10px;
+}
+
+.box h1, button {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+}
+
+.box input {
+    border: 1px solid #9b9797;
+    min-height: 25px;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.box-h1 {
+    font-size: 25px;
 }

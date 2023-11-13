@@ -15,13 +15,17 @@ text-align: center;
 }
 
 #chat {
-width: 300px;
-height: 450px;
-background: #6C7A89;
+	width: 300px;
+	height: 490px;
+	background: #6C7A89;
+	border-radius: 5px;
 }
 
 #chat h1{
 	height: 30px;
+	text-align: center;
+	font-size: 22px;
+	padding: 5px;
 }
 
 #chat form {
@@ -52,12 +56,29 @@ background: #6C7A89;
 #chat-history .msgReceived {
 	float: left;
 	text-align: left;
-	border-radius: 0 10px 10px 0;/* superior esquerdo, superior direito, inferior direito, inferior esquerdo */
+	border-radius: 0 10px 10px 0;
 }
 
 #chat-history .msgSent {
 	float: right;
 	text-align: right;
-	border-radius: 10px 0 0 10px;/* superior esquerdo, superior direito, inferior direito, inferior esquerdo */
+	border-radius: 10px 0 0 10px;
+}
 
+#chat input {
+	height: 25px;
+	width: 183px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border-radius: 5px;
+	border: 1px solid #6C7A89;
+}
+
+#sendMsg > button{
+	width: 95%;
+	border-radius: 5px;
+}
+
+#sendMsg > label{
+	margin-right: 3px;
 }
